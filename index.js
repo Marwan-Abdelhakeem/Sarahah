@@ -30,7 +30,7 @@ app.use(passport.session());
 
 app.use(express.urlencoded({ extended: true }));
 
-// app.set("view engine", "ejs");
+app.set("view engine", "ejs");
 // app.set("views", path.join(path.resolve(), "views"));
 // app.use("/public", express.static(path.join(path.resolve(), "public")));
 
