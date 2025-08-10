@@ -1,0 +1,72 @@
+<%- include('./shared/headers.ejs') %>
+
+<title>Sarahah - Anonymous Feedback</title>
+
+<section class="hero-section">
+    <div class="container text-center">
+        <div class="hero-content">
+            <h1 class="hero-title">Receive Honest Feedback</h1>
+            <p class="hero-description">
+                Sarahah helps you receive constructive feedback from your friends and coworkers anonymously. 
+                Improve yourself by understanding how others perceive you.
+                </p>
+                
+                <% if (!session.isLoggedIn) { %>
+                    <div class="d-flex justify-content-center flex-wrap">
+                        <a href="/auth/register" class="btn btn-primary btn-hero">
+                            <i class="far fa-edit me-2"></i> Join Now
+                        </a>
+                        <a href="/auth/login" class="btn btn-outline-primary btn-hero">
+                            <i class="fas fa-sign-in-alt me-2"></i> Sign In
+                        </a>
+                    </div>
+                <% } else { %>
+                    <a href="/message" class="btn btn-primary btn-hero">
+                        <i class="fas fa-envelope me-2"></i> View Messages
+                    </a>
+                <% } %>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-4 mb-5 mb-md-0">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-secret"></i>
+                    </div>
+                    <h3 class="feature-title">100% Anonymous</h3>
+                    <p class="feature-description">
+                        Send and receive messages completely anonymously. Your identity stays protected.
+                    </p>
+                </div>
+                <div class="col-md-4 mb-5 mb-md-0">
+                    <div class="feature-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3 class="feature-title">Constructive Feedback</h3>
+                    <p class="feature-description">
+                        Get honest opinions that help you grow personally and professionally.
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-icon">
+                        <i class="fas fa-share-alt"></i>
+                    </div>
+                    <h3 class="feature-title">Easy to Share</h3>
+                    <p class="feature-description">
+                        Share your profile link or QR code to start receiving messages.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="text-center">
+        <div class="container">
+            <p class="mb-0">© 2023 Sarahah. All rights reserved.</p>
+        </div>
+    </footer>
+
+<%- include('./shared/footer.ejs') %>

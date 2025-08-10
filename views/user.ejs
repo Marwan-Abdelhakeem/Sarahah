@@ -1,0 +1,74 @@
+<%- include('./shared/headers.ejs') %>
+
+    <title><%= user.name %> | Sarahah</title>
+    
+    <div class="container py-5">
+        <div class="profile-card bg-white text-center">
+            <div class="avatar-container mb-4">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#profileModal">
+                    <img src="<%= user.photo?.secure_url || '../public/img/avatar.png' %>" class="avatar" alt="<%= user.name %>'s profile photo">
+                </a>
+            </div>
+            <h2 class="mb-3 fw-bold"><%= user.name %></h2>
+            
+            <div class="message-form">
+                <form action="/user/send/<%= user._id %>" method="post">
+                    <textarea class="form-control message-textarea" name="message" id="message" 
+                              placeholder="Write your anonymous message here..." required></textarea>
+                    <button type="submit" class="btn send-btn mt-3">
+                        <i class="far fa-paper-plane me-2"></i> Send Message
+                    </button>
+                </form>
+            </div>
+            
+            <button class="share-btn" data-bs-toggle="modal" data-bs-target="#shareModal">
+                <i class="fas fa-share-alt me-2"></i> Share Profile
+            </button>
+        </div>
+    </div>
+
+    <!-- Share Profile Modal -->
+    <div class="modal fade" id="shareModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Share Profile</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="mb-4">
+                        <p class="mb-2">Profile link:</p>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" value="<%= url %>" id="profileLink" readonly>
+                            <button class="btn btn-primary" onclick="copyToClipboard()">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <p class="mb-3">Scan QR code to share:</p>
+                        <img src="<%= qrCode %>" class="qr-code img-fluid" alt="QR Code">
+                    </div>
+                    <div class="social-share mt-4">
+                        <p class="mb-2">Share via:</p>
+                        <div class="d-flex justify-content-center gap-3">
+                            <a href="https://wa.me/?text=Send%20me%20anonymous%20messages%20on%20Sarahah:%20<%= encodeURIComponent(url) %>" 
+                               class="btn btn-success" target="_blank">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
+                            <a href="https://twitter.com/intent/tweet?text=Send%20me%20anonymous%20messages%20on%20Sarahah:%20<%= encodeURIComponent(url) %>" 
+                               class="btn btn-info text-white" target="_blank">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="https://www.facebook.com/sharer/sharer.php?u=<%= encodeURIComponent(url) %>" 
+                               class="btn btn-primary" target="_blank">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<%- include('./shared/footer.ejs') %>

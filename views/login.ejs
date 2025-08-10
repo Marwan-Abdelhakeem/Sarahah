@@ -1,0 +1,52 @@
+<%- include('./shared/headers.ejs') %>
+
+    <title>Sarahah - Login</title>
+    
+    <div class="container my-5">
+        <div class="login-card bg-white p-4 p-md-5">
+            <div class="text-center mb-4">
+                <i class="fas fa-user-secret user-icon"></i>
+                <h2 class="fw-bold mb-2">Welcome Back</h2>
+                <p class="text-muted">Sign in to your Sarahah account</p>
+            </div>
+
+                    <form method="POST" action="/auth/handleLogin" class="mb-3">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="••••••••" required>
+                            <div class="text-end mt-2">
+                                <button type="submit" formaction="/auth/forgotPass" formmethod="post" class="forgot-link bg-transparent border-0 p-0" onclick="document.getElementById('password').removeAttribute('required')">
+                                    Forgot password?
+                                </button>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-login w-100 mb-3">
+                            <i class="fas fa-sign-in-alt me-2"></i> Login
+                        </button>
+                    </form>
+
+                    <div class="divider">
+                        <span class="divider-text">OR CONTINUE WITH</span>
+                    </div>
+
+                    <div class="d-flex gap-3 mb-4">
+                        <a href="/auth/google" class="oauth-btn btn btn-light flex-grow-1 d-flex align-items-center justify-content-center">
+                            <i class="fab fa-google me-2" style="color: var(--google-red);"></i> Google
+                        </a>
+                        <a href="/auth/facebook" class="oauth-btn btn btn-light flex-grow-1 d-flex align-items-center justify-content-center">
+                            <i class="fab fa-facebook-f me-2" style="color: var(--facebook-blue);"></i> Facebook
+                        </a>
+                    </div>
+
+                    <div class="text-center">
+                        <p>Don't have an account? <a href="/auth/register" class="auth-link">Create one</a></p>
+                    </div>
+        </div>
+    </div>
+
+<%- include('./shared/footer.ejs') %>
+

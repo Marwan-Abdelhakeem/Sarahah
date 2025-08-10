@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Password Reset | Sarahah</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f7fa;
+      margin: 0;
+      padding: 40px 0;
+      color: #333;
+    }
+
+    .email-container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .envelope {
+      background-color: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #10bbb3 0%, #0a8a84 100%);
+      padding: 30px;
+      text-align: center;
+      position: relative;
+    }
+
+    .header::after {
+      content: '';
+      position: absolute;
+      bottom: -20px;
+      left: 0;
+      right: 0;
+      height: 20px;
+      background-color: #ffffff;
+      border-radius: 20px 20px 0 0;
+    }
+
+    .logo-container {
+      display: inline-flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .logo {
+      width: 50px;
+      height: 50px;
+      margin-right: 15px;
+    }
+
+    .app-name {
+      color: white;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-top: 7px;
+    }
+
+    .content {
+      padding: 40px;
+    }
+
+    h1 {
+      color: #10bbb3;
+      font-size: 28px;
+      margin-top: 0;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    .otp-container {
+      margin: 40px 0;
+      text-align: center;
+    }
+
+    .otp-code {
+      display: inline-block;
+      background: linear-gradient(135deg, #10bbb3 0%, #0a8a84 100%);
+      color: white;
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: 5px;
+      padding: 15px 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(16, 187, 179, 0.3);
+    }
+
+    .note {
+      background-color: #f8f9fa;
+      border-left: 4px solid #10bbb3;
+      padding: 15px;
+      margin: 30px 0;
+      font-size: 14px;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      color: #777;
+      border-top: 1px solid #eee;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background-color: #10bbb3;
+      color: white;
+      text-decoration: none;
+      padding: 12px 30px;
+      border-radius: 30px;
+      font-weight: 600;
+      margin: 20px 0;
+      transition: all 0.3s ease;
+    }
+
+    .cta-button:hover {
+      background-color: #0a8a84;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(16, 187, 179, 0.4);
+    }
+
+    .expiry-notice {
+      color: #dc3545;
+      font-weight: 600;
+    }
+
+    @media (max-width: 600px) {
+      .content {
+        padding: 30px 20px;
+      }
+      
+      h1 {
+        font-size: 24px;
+      }
+      
+      .otp-code {
+        font-size: 28px;
+        padding: 12px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="email-container">
+    <div class="envelope">
+      <div class="header">
+        <div class="logo-container">
+          <img src="https://res.cloudinary.com/dxyhgxd3j/image/upload/v1753913646/logo300_oaewnk.png" alt="Sarahah Logo" class="logo" />
+          <div class="app-name">Sarahah</div>
+        </div>
+      </div>
+
+      <div class="content">
+        <h1>Password Reset Request</h1>
+        <p>We received a request to reset your Sarahah account password. Please use the following One-Time Password (OTP) to verify your identity:</p>
+        
+        <div class="otp-container">
+          <div class="otp-code"><%= OTP %></div>
+        </div>
+        
+        <p class="expiry-notice">This OTP will expire in 15 minutes.</p>
+        
+        <div class="note">
+          <p><strong>Note:</strong> If you didn't request this password reset, please ignore this email or contact our support team immediately.</p>
+        </div>
+        
+        <p>For security reasons, please don't share this OTP with anyone. Our team will never ask you for your password or OTP.</p>
+        
+        <p>Thank you,<br>The Sarahah Team</p>
+      </div>
+
+      <div class="footer">
+        <p>&copy; <%= new Date().getFullYear() %> Sarahah App. All rights reserved.</p>
+        <p>This email was sent to you as part of your Sarahah account security.</p>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

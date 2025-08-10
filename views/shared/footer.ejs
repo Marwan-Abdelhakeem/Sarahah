@@ -1,0 +1,128 @@
+<!-- Bootstrap 5 JS Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    // ===== Password Toggle =====
+    function togglePassword(fieldId) {
+        const field = document.getElementById(fieldId);
+        const icon = field.nextElementSibling;
+        if (field.type === 'password') {
+            field.type = 'text';
+            icon.classList.replace('fa-eye', 'fa-eye-slash');
+        } else {
+            field.type = 'password';
+            icon.classList.replace('fa-eye-slash', 'fa-eye');
+        }
+    }
+
+    // ===== Password Match Check =====
+    function checkPasswordMatch() {
+        const password = document.getElementById('password');
+        const confirmPassword = document.getElementById('confirmPassword');
+        const message = document.getElementById('passwordMatch');
+
+        if (password.value !== confirmPassword.value) {
+            confirmPassword.setCustomValidity("Passwords don't match");
+            message.textContent = "Passwords don't match";
+        } else {
+            confirmPassword.setCustomValidity('');
+            message.textContent = "";
+        }
+    }
+
+    // ===== Password Strength Meter =====
+    function checkPasswordStrength(password) {
+        const strengthBar = document.getElementById('passwordStrength');
+        let strength = 0;
+
+        if (password.length >= 8) strength += 1;
+        if (password.length >= 12) strength += 1;
+        if (password.match(/([a-z].*[A-Z])|([A-Z].*[a-z])/)) strength += 1;
+        if (password.match(/[0-9]/)) strength += 1;
+        if (password.match(/[^a-zA-Z0-9]/)) strength += 1;
+
+        const colors = [
+            { width: '0%', color: 'transparent' },
+            { width: '20%', color: 'var(--error-color)' },
+            { width: '40%', color: '#ffc107' },
+            { width: '60%', color: '#17a2b8' },
+            { width: '80%', color: '#28a745' },
+            { width: '100%', color: 'var(--success-color)' }
+        ];
+
+        strengthBar.style.width = colors[strength].width;
+        strengthBar.style.background = colors[strength].color;
+
+        if (document.getElementById('confirmPassword')?.value) {
+            checkPasswordMatch();
+        }
+    }
+
+    // ===== Form Submit Validation (Works for register/reset forms) =====
+    function attachPasswordValidation(formId) {
+        const form = document.getElementById(formId);
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                const password = document.getElementById('password');
+                const confirmPassword = document.getElementById('confirmPassword');
+                if (password.value !== confirmPassword.value) {
+                    e.preventDefault();
+                    confirmPassword.focus();
+                    document.getElementById('passwordMatch').textContent = "Passwords don't match";
+                }
+            });
+        }
+    }
+    attachPasswordValidation('registerForm');
+    attachPasswordValidation('resetForm');
+
+    // ===== Copy to Clipboard =====
+    function copyToClipboard() {
+        const copyText = document.getElementById("profileLink");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999);
+        document.execCommand("copy");
+        
+        // Show tooltip feedback
+        const tooltip = new bootstrap.Tooltip(copyText, {
+            title: "Copied!",
+            trigger: "manual"
+        });
+        tooltip.show();
+        
+        setTimeout(() => {
+            tooltip.hide();
+        }, 1500);
+    }
+
+    // ===== Auto-resize Textarea =====
+    const textarea = document.getElementById('message');
+    if (textarea) {
+        textarea.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = this.scrollHeight + 'px';
+        });
+    }
+
+    // ===== OTP Input Formatting =====
+    const otpInput = document.getElementById('otp');
+    if (otpInput) {
+        otpInput.addEventListener('input', function() {
+            if (this.value.length > 6) {
+                this.value = this.value.slice(0, 6);
+            }
+        });
+    }
+
+    // ===== Enable Bootstrap Tooltips =====
+    document.addEventListener('DOMContentLoaded', function() {
+        const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        tooltipTriggerList.map(function(tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+    });
+</script>
+
+</body>
+
+</html>
