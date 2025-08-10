@@ -46,7 +46,10 @@ authRouter.get(
 );
 
 // Facebook
-authRouter.get("/facebook", passport.authenticate("google"));
+authRouter.get(
+  "/facebook",
+  passport.authenticate("google", { scope: ["profile", "email"] })
+);
 // authRouter.get("/facebook", passport.authenticate("facebook"));
 
 // authRouter.get(
