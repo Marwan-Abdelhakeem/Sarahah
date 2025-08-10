@@ -32,9 +32,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.set("view engine", "ejs");
 app.set("views", path.join(path.resolve(), "views"));
-// app.use("/public", express.static(path.join(path.resolve(), "public")));
-
-app.use("/public", express.static("public"));
+app.use("/public", express.static(path.join(path.resolve(), "public")));
 
 app.get("/", (req, res, next) => {
   res.render("home.ejs");
