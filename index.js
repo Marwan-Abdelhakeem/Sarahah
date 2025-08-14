@@ -9,9 +9,9 @@ import userRouter from "./src/modules/user/user.router.js";
 import { sessionConfig } from "./db/session.js";
 import passport from "passport";
 
-import "./src/modules/auth/oauth/google.strategy.js";
-import "./src/modules/auth/oauth/facebook.strategy.js";
-import "./src/modules/auth/oauth/passport.js";
+// import "./src/modules/auth/oauth/google.strategy.js";
+// import "./src/modules/auth/oauth/facebook.strategy.js";
+// import "./src/modules/auth/oauth/passport.js";
 
 dotenv.config({ path: path.resolve("./config/.env") });
 
