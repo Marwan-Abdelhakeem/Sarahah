@@ -12,25 +12,24 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
-        const email = profile.emails?.[0]?.value;
-        if (!email)
-          return done(new Error("Email not provided by Facebook"), false);
+        const photoUrl = `https://graph.facebook.com/${profile.id}/picture?type=large&width=1080&height=1080&access_token=${accessToken}`;
+        let user = await User.findOne({ providerId: profile.id });
 
-        const existingUser = await User.findOne({ email });
-        if (existingUser) {
-          return done(null, existingUser);
-        }
-
-        const newUser = await User.create({
-          name: profile.displayName,
-          email,
-          photo: {
-            secure_url: profile.photos?.[0]?.value,
+        if (!user) {
+          user = await User.create({
+            name: profile.displayName,
+            photo: {
+              secure_url: photoUrl,
+              provider: "facebook",
+            },
             provider: "facebook",
-          },
-        });
-
-        return done(null, newUser);
+            providerId: profile.id,
+          });
+        } else {
+          user.photo.secure_url = photoUrl;
+          await user.save();
+        }
+        return done(null, user);
       } catch (err) {
         return done(err, false);
       }

@@ -45,19 +45,16 @@ authRouter.get(
   oauthLogin
 );
 
-// Facebook
-authRouter.get(
-  "/facebook",
-  passport.authenticate("google", { scope: ["profile", "email"] })
-);
-// authRouter.get("/facebook", passport.authenticate("facebook"));
+// Facebook;
+authRouter.get("/facebook", passport.authenticate("facebook"));
 
-// authRouter.get(
-//   "/facebook/callback",
-//   passport.authenticate("facebook", {
-//     failureRedirect: "/login",
-//     successRedirect: "/message",
-//   })
-// );
+authRouter.get(
+  "/facebook/callback",
+  passport.authenticate("facebook", {
+    failureRedirect: "/login",
+    failureFlash: true,
+  }),
+  oauthLogin
+);
 
 export default authRouter;

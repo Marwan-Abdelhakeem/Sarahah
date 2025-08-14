@@ -15,13 +15,14 @@ passport.use(
 
         if (!user) {
           user = await User.create({
-            googleId: profile.id,
             name: profile.displayName,
             email: profile.emails[0].value,
             photo: {
-              secure_url: profile.photos?.[0]?.value,
+              secure_url: profile.photos?.[0]?.value.split("=")[0] + "=s0",
               provider: "google",
             },
+            provider: "google",
+            providerId: profile.id,
           });
         }
         return done(null, user);

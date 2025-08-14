@@ -6,6 +6,15 @@ const userSchema = new Schema(
     email: { type: String, unique: true, lowercase: true, trim: true },
     password: String,
     photo: Object,
+    provider: {
+      type: String,
+      enum: ["sarahah", "facebook", "google"],
+      default: "sarahah",
+    },
+    providerId: {
+      type: String,
+      index: true,
+    },
   },
   { timestamps: true }
 );
