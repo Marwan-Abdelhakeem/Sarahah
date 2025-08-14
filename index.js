@@ -1,7 +1,7 @@
 import path from "path";
 import dotenv from "dotenv";
 import express from "express";
-// import flash from "connect-flash";
+import flash from "connect-flash";
 import { connectDB } from "./db/connection.js";
 import authRouter from "./src/modules/auth/auth.router.js";
 import messageRouter from "./src/modules/messages/message.router.js";
@@ -9,9 +9,9 @@ import userRouter from "./src/modules/user/user.router.js";
 import { sessionConfig } from "./db/session.js";
 import passport from "passport";
 
-// import "./src/modules/auth/oauth/google.strategy.js";
-// import "./src/modules/auth/oauth/facebook.strategy.js";
-// import "./src/modules/auth/oauth/passport.js";
+import "./src/modules/auth/oauth/google.strategy.js";
+import "./src/modules/auth/oauth/facebook.strategy.js";
+import "./src/modules/auth/oauth/passport.js";
 
 dotenv.config({ path: path.resolve("./config/.env") });
 
@@ -20,19 +20,18 @@ const port = +process.env.PORT || 3000;
 connectDB();
 
 app.use(express.urlencoded({ extended: true }));
+app.use("/public", express.static(path.join(path.resolve(), "public")));
 app.set("view engine", "ejs");
 app.set("views", path.join(path.resolve(), "views"));
-app.use("/public", express.static(path.join(path.resolve(), "public")));
 
 app.use(sessionConfig());
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
-// app.use(flash());
 
 app.use((req, res, next) => {
   res.locals.session = req.session;
-  res.locals.error = "error";
-  // res.locals.error = req.flash("error");
+  res.locals.error = req.flash("error");
   next();
 });
 
