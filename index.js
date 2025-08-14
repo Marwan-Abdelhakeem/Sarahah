@@ -1,7 +1,7 @@
 import path from "path";
 import dotenv from "dotenv";
 import express from "express";
-import flash from "connect-flash";
+// import flash from "connect-flash";
 import { connectDB } from "./db/connection.js";
 import authRouter from "./src/modules/auth/auth.router.js";
 import messageRouter from "./src/modules/messages/message.router.js";
@@ -27,7 +27,7 @@ app.use("/public", express.static(path.join(path.resolve(), "public")));
 app.use(sessionConfig());
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(flash());
+// app.use(flash());
 
 app.use((req, res, next) => {
   res.locals.session = req.session;
