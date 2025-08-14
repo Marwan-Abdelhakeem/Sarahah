@@ -39,7 +39,7 @@ authRouter.get(
 authRouter.get(
   "/google/callback",
   passport.authenticate("google", {
-    failureRedirect: "/login",
+    failureRedirect: "/auth/login",
     failureFlash: true,
   }),
   oauthLogin
@@ -51,7 +51,7 @@ authRouter.get("/facebook", passport.authenticate("facebook"));
 authRouter.get(
   "/facebook/callback",
   passport.authenticate("facebook", {
-    failureRedirect: "/login",
+    failureRedirect: "/auth/login",
     failureFlash: true,
   }),
   oauthLogin
