@@ -24,14 +24,16 @@ app.set("view engine", "ejs");
 app.set("views", path.join(path.resolve(), "views"));
 app.use("/public", express.static(path.join(path.resolve(), "public")));
 
-app.use(sessionConfig(), flash(), (req, res, next) => {
+app.use(sessionConfig());
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+
+app.use((req, res, next) => {
   res.locals.session = req.session;
   res.locals.error = req.flash("error");
   next();
 });
-
-app.use(passport.initialize());
-app.use(passport.session());
 
 app.get("/", (req, res, next) => {
   res.render("home.ejs");
