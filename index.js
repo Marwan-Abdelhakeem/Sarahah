@@ -32,6 +32,8 @@ app.use(flash());
 app.use((req, res, next) => {
   res.locals.session = req.session;
   res.locals.error = req.flash("error");
+  delete req.session.flash;
+  console.log(req.session);
   next();
 });
 
