@@ -15,4 +15,5 @@ export const userId = Joi.object({
       "string.pattern.base": "Invalid user ID format",
       "any.required": "User ID is required",
     }),
+  fbclid: Joi.string().optional(),
 });
