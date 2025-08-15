@@ -13,9 +13,4 @@ export const sessionConfig = () =>
     resave: false,
     saveUninitialized: false,
     store,
-    cookie: {
-      secure: false,
-      httpOnly: true,
-      sameSite: "lax",
-    },
   });

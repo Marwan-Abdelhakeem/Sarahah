@@ -24,8 +24,11 @@ app.use("/public", express.static(path.join(path.resolve(), "public")));
 app.set("view engine", "ejs");
 app.set("views", path.join(path.resolve(), "views"));
 
-app.use(sessionConfig());
 app.use(flash());
+app.get((req, res, next) => {
+  delete req.session.flash;
+});
+app.use(sessionConfig());
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -37,6 +40,7 @@ app.use((req, res, next) => {
 
 app.get("/", (req, res, next) => {
   res.render("home.ejs");
+  // delete req.session.flash;
 });
 
 app.use("/auth", authRouter);
