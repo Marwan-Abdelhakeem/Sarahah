@@ -8,6 +8,7 @@ import messageRouter from "./src/modules/messages/message.router.js";
 import userRouter from "./src/modules/user/user.router.js";
 import { sessionConfig } from "./db/session.js";
 import passport from "passport";
+import { getRobotsContent } from "./src/utils/robots.js";
 
 import "./src/modules/auth/oauth/google.strategy.js";
 import "./src/modules/auth/oauth/facebook.strategy.js";
@@ -21,6 +22,10 @@ connectDB();
 
 app.use(express.urlencoded({ extended: true }));
 app.use("/public", express.static(path.join(path.resolve(), "public")));
+app.get("/robots.txt", (req, res) => {
+  res.type("text/plain");
+  res.send(getRobotsContent());
+});
 app.set("view engine", "ejs");
 app.set("views", path.join(path.resolve(), "views"));
 
