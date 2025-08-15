@@ -6,5 +6,6 @@ Disallow: /auth/resetPassword
 Allow: /
 Allow: /auth/register
 Allow: /auth/login
+Sitemap: https://sarahah-beta.vercel.app/public/sitemap.xml
     `;
 };
